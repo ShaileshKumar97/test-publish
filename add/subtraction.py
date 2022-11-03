@@ -5,5 +5,8 @@ def subtraction(a, b):
     Args:
         a: an integer no
         b: an integer no
+    
+    Returns:
+        subtracted value
     """
     return a - b
