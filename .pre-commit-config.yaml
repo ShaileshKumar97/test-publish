@@ -28,7 +28,7 @@ repos:
     rev: v3.8.0
     hooks:
     -   id: reorder-python-imports
-        args: [--application-directories=.add, --py38-plus]
+        args: [--application-directories=.add-test, --py38-plus]
 
 -   repo: https://github.com/asottile/pyupgrade
     rev: v2.37.3
@@ -40,5 +40,5 @@ repos:
     rev: v0.971
     hooks:
     -   id: mypy
-        files: ^add/
+        files: ^add-test/
         args: [--ignore-missing-imports]
