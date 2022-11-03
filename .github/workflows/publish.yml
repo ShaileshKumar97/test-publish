@@ -22,4 +22,4 @@ jobs:
     - name: Build and publish
       run: |
         python setup.py sdist bdist_wheel
-        twine upload dist/* -u ${{ secrets.PYPI_USERNAME }} -p ${{ secrets.PYPI_PASSWORD }}
+        twine upload dist/* -u ${{ secrets.PYPI_USERNAME }} -p ${{ secrets.PYPI_PASSWORD }} --verbose
