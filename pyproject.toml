@@ -26,8 +26,8 @@ exclude = '''
 '''
 
 [tool.mypy]
-mypy_path = "add-test"
-files = ["add-test"]
+mypy_path = "add-testing"
+files = ["add-testing"]
 check_untyped_defs = true
 disallow_any_generics = true
 ignore_missing_imports = true
