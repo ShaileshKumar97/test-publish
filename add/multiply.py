@@ -5,5 +5,8 @@ def multiply(a, b):
     Args:
         a: an integer no
         b: an integer no
+    
+    Returns:
+        multiplied value
     """
     return a * b
