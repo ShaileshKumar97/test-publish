@@ -17,7 +17,7 @@ jobs:
         id: read_release
         shell: bash
         run: |
-          r=$(cat CHANGELOG.md)
+          r=$(cat ./CHANGELOG.md)
           r="${r//'%'/'%25'}"
           r="${r//$'\n'/'%0A'}"
           r="${r//$'\r'/'%0D'}"
