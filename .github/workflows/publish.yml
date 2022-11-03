@@ -18,5 +18,5 @@ jobs:
       uses: pypa/gh-action-pypi-publish@v1.4.2
       with:
         verbose: true
-        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        user: ${{ secrets.PYPI_USERNAME }}
+        password: ${{ secrets.PYPI_PASSWORD }}
