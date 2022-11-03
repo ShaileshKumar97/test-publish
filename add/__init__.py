@@ -1,3 +1,5 @@
-from add.addition import calculate
+from add.addition import addition
+from add.multiply import multiply
+from add.subtraction import subtraction
 
-__all__ = ["calculate"]
+__all__ = ["addition", "multiply", "subtraction"]
