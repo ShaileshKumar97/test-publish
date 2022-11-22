@@ -1,9 +1,11 @@
 name: Changelog CI
 
 on:
-  push:
-    tags: 
-      - "v*"
+  # push:
+  pull_request:
+    types: [ opened ]
+    # tags: 
+    #   - "v*"
 
   # Optionally you can use `workflow_dispatch` to run Changelog CI Manually
   # workflow_dispatch:
