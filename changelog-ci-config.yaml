@@ -9,12 +9,13 @@ version_regex: '([0-9]{1,2})+[.]+([0-9]{1,2})+[.]+([0-9]{1,2})\s\(\d{1,2}-\d{1,2
 exclude_labels:
   - bot
   - dependabot
-  - ci
+  # - ci
 group_config:
   - title: Bug Fixes
     labels:
       - bug
       - bugfix
+      - fix
   - title: Code Improvements
     labels:
       - improvements
@@ -22,6 +23,7 @@ group_config:
   - title: New Features
     labels:
       - feature
+      - feat
   - title: Documentation Updates
     labels:
       - docs
