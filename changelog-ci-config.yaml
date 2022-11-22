@@ -22,6 +22,7 @@ group_config:
       - enhancement
   - title: New Features
     labels:
+      - chore
       - feature
       - feat
   - title: Documentation Updates
