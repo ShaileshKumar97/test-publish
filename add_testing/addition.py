@@ -11,4 +11,6 @@ def addition(a, b):
     Returns:
         added value
     """
+    if not isinstance(a, int) and not isinstance(b, int):
+        raise TypeError(f"Variables a and b should be of type 'int' but found a: {type(a)}, b: {type(b)}.")
     return a + b
