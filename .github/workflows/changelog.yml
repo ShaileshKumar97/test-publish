@@ -1,48 +1,47 @@
-name: Changelog CI
+name: Generate Changelog
 
 on:
-  # push:
-  pull_request:
-    types: [ opened ]
-    # tags: 
-    #   - "v*"
-
-  # Optionally you can use `workflow_dispatch` to run Changelog CI Manually
-  workflow_dispatch:
-    inputs:
-      release_version:
-        description: 'Set Release Version'
-        required: true
+  push:
+    tags:
+      - 'v*'
 
 jobs:
-  build:
+  generate_changelog:
     runs-on: ubuntu-latest
 
     steps:
-      # Checks-out your repository
-      - uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Run Changelog CI
-        uses: saadmk11/changelog-ci@v1.1.0
-        with:
-          # Optional, you can provide any name for your changelog file,
-          # We currently support Markdown (.md) and reStructuredText (.rst) files
-          # defaults to `CHANGELOG.md` if not provided.
-          changelog_filename: CHANGELOG.rst
-          # Optional, only required when you want more customization
-          # e.g: group your changelog by labels with custom titles,
-          # different version prefix, pull request title and version number regex etc.
-          # config file can be in JSON or YAML format.
-          config_file: changelog-ci-config.yaml
-          # Optional, This will be used to configure git
-          # defaults to `github-actions[bot]` if not provided.
-          committer_username: 'test'
-          committer_email: 'test@test.com'
-          # Optional, only required when you want to run Changelog CI 
-          # on an event other than `pull_request` event.
-          # In this example `release_version` is fetched from `workflow_dispatch` events input.
-          # You can use any other method to fetch the release version
-          # such as environment variable or from output of another action
-          # release_version: ${{ github.event.inputs.release_version }}
-          # Optional
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8  # Change this to the version of Python you want to use
+
+    # - name: Install dependencies
+    #   run: pip install -r requirements.txt  # Change this to the path of your requirements file, if applicable
+
+    - name: Get previous tag
+      run: |
+        PREV_TAG=$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))
+        echo "PREV_TAG=${PREV_TAG}" >> $GITHUB_ENV
+
+    - name: Generate changelog
+      run: |
+        PREV_TAG=${{ env.PREV_TAG }}
+        echo "Bug Fixes:" > changelog.md
+        git log ${PREV_TAG}..HEAD --grep="^fix" --pretty=format:"%C(auto)- %s %h" >> changelog.md
+        echo "" >> changelog.md
+        echo "Features:" >> changelog.md
+        git log ${PREV_TAG}..HEAD --grep="^chore" --pretty=format:"%C(auto)- %s %h" >> changelog.md
+        echo "" >> changelog.md
+        echo "Merged Pull Requests:" >> changelog.md
+        git log ${PREV_TAG}..HEAD --grep="^Merge pull request" --pretty=format:"%C(auto)- %s %h" >> changelog.md
+
+    - name: Commit and push changes
+      run: |
+        git config user.name "ShaileshKumar97"
+        git config user.email "kumar.shailesh1597@gmail.com"
+        git add changelog.md
+        git commit -m "Generate changelog"
+        git push origin main  # Change this to your main branch name
