@@ -44,4 +44,4 @@ jobs:
         git config user.email "kumar.shailesh1597@gmail.com"
         git add changelog.md
         git commit -m "Generate changelog"
-        git push origin master  # Change this to your main branch name
+        git push https://${{ secrets.GIT_TOKEN }}@github.com/ShaileshKumar97/test-publish.git
