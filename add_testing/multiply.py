@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+#
 def multiply(a, b):
     """
     This function multiply the two values.
