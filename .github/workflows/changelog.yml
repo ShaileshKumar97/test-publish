@@ -44,4 +44,4 @@ jobs:
         git config user.email "kumar.shailesh1597@gmail.com"
         git add changelog.md
         git commit -m "Generate changelog"
-        git push
+        git push origin master
