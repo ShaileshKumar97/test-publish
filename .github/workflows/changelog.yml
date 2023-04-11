@@ -42,7 +42,6 @@ jobs:
       run: |
         git config user.name "ShaileshKumar97"
         git config user.email "kumar.shailesh1597@gmail.com"
-        git remote add origin https://github.com/ShaileshKumar97/test-publish.git
         git add changelog.md
         git commit -m "Generate changelog"
-        git push https://${{ secrets.GIT_TOKEN }}@github.com/ShaileshKumar97/test-publish.git master
+        git push
