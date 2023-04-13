@@ -12,20 +12,20 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      with:
-        token: ${{secrets.GIT_TOKEN}}
+      # with:
+      #   token: ${{secrets.GIT_TOKEN}}
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8  # Change this to the version of Python you want to use
+    # - name: Set up Python
+    #   uses: actions/setup-python@v2
+    #   with:
+    #     python-version: 3.8  # Change this to the version of Python you want to use
 
     # - name: Install dependencies
     #   run: pip install -r requirements.txt  # Change this to the path of your requirements file, if applicable
 
     - name: Get previous tag
       run: |
-        PREV_TAG=$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))
+        PREV_TAG=$(git tag --sort=-creatordate | sed -n '2 p')
         echo "PREV_TAG=${PREV_TAG}" >> $GITHUB_ENV
 
     - name: Generate changelog
@@ -42,8 +42,8 @@ jobs:
 
     - name: Commit and push changes
       run: |
-        git config user.name "ShaileshKumar97"
-        git config user.email "kumar.shailesh1597@gmail.com"
+        git config --global user.name "ShaileshKumar97"
+        git config --global user.email "kumar.shailesh1597@gmail.com"
         git add changelog.md
         git commit -m "Generate changelog"
-        git push origin master
+        git push
