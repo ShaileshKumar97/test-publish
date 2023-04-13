@@ -23,16 +23,16 @@ jobs:
     # - name: Install dependencies
     #   run: pip install -r requirements.txt  # Change this to the path of your requirements file, if applicable
 
-    - name: Get previous tag
-      id: vars
-      run: |
-        PREV_TAG=$(git tag --sort=-creatordate | sed -n '2 p')
-        echo "PREV_TAG=${PREV_TAG}" >> $GITHUB_OUTPUT
-        echo $GITHUB_OUTPUT
+    # - name: Get previous tag
+    #   id: vars
+    #   run: |
+    #     PREV_TAG=$(git tag --sort=-creatordate | sed -n '2 p')
+    #     echo "PREV_TAG=${PREV_TAG}" >> $GITHUB_OUTPUT
+    #     echo $GITHUB_OUTPUT
 
     - name: Generate changelog
       run: |
-        PREV_TAG=${{ env.PREV_TAG }}
+        PREV_TAG=$(git tag --sort=-creatordate | sed -n '2 p')
         echo $PREV_TAG
         echo "Bug Fixes:" > changelog.md
         git log ${PREV_TAG}..HEAD --grep="^fix" --pretty=format:"%C(auto)- %s %h" >> changelog.md
@@ -42,8 +42,8 @@ jobs:
         echo "" >> changelog.md
         echo "Merged Pull Requests:" >> changelog.md
         git log ${PREV_TAG}..HEAD --grep="^Merge pull request" --pretty=format:"%C(auto)- %s %h" >> changelog.md
-      env:
-        PREV_TAG: ${{steps.vars.outputs.PREV_TAG}}
+      # env:
+      #   PREV_TAG: ${{steps.vars.outputs.PREV_TAG}}
 
     - name: Commit and push changes
       run: |
