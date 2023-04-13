@@ -7,4 +7,4 @@ echo "Features:" >> changelog.md
 git log ${PREV_TAG}..HEAD --grep="^chore" --pretty=format:"%C(auto)- %s %h" | grep chore >> changelog.md
 echo "\\" >> changelog.md
 echo "Merged Pull Requests:" >> changelog.md
-git log ${PREV_TAG}..HEAD --grep="^Merge pull request" --pretty=format:"%C(auto)- %s %h" | grep Merge pull request >> changelog.md
+git log ${PREV_TAG}..HEAD --grep="^Merge pull request" --pretty=format:"%C(auto)- %s %h" | grep "Merge pull request" >> changelog.md
