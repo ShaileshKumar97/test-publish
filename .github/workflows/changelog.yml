@@ -1,50 +1,17 @@
 name: Generate Changelog
-
 on:
   push:
     branches:
       - 'master'
-
 jobs:
   generate_changelog:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      # with:
-      #   token: ${{secrets.GIT_TOKEN}}
-
-    # - name: Set up Python
-    #   uses: actions/setup-python@v2
-    #   with:
-    #     python-version: 3.8  # Change this to the version of Python you want to use
-
-    # - name: Install dependencies
-    #   run: pip install -r requirements.txt  # Change this to the path of your requirements file, if applicable
-
-    # - name: Get previous tag
-    #   id: vars
-    #   run: |
-    #     PREV_TAG=$(git tag --sort=-creatordate | sed -n '2 p')
-    #     echo "PREV_TAG=${PREV_TAG}" >> $GITHUB_OUTPUT
-    #     echo $GITHUB_OUTPUT
-
     - name: Generate changelog
       run: |
-        PREV_TAG=$(git tag --sort=-creatordate | sed -n '2 p')
-        echo $PREV_TAG
-        echo "Bug Fixes:" > changelog.md
-        git log ${PREV_TAG}..HEAD --grep="^fix" --pretty=format:"%C(auto)- %s %h" >> changelog.md
-        echo "" >> changelog.md
-        echo "Features:" >> changelog.md
-        git log ${PREV_TAG}..HEAD --grep="^chore" --pretty=format:"%C(auto)- %s %h" >> changelog.md
-        echo "" >> changelog.md
-        echo "Merged Pull Requests:" >> changelog.md
-        git log ${PREV_TAG}..HEAD --grep="^Merge pull request" --pretty=format:"%C(auto)- %s %h" >> changelog.md
-      # env:
-      #   PREV_TAG: ${{steps.vars.outputs.PREV_TAG}}
-
+        bash runner.sh
     - name: Commit and push changes
       run: |
         git config --global user.name "ShaileshKumar97"
