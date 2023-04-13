@@ -1,5 +1,5 @@
 #!/bin/bash
-git tag --sort=-creatordate | sed -n '2 p'
+touch shailesh
 export PREV_TAG="$(git tag --sort=-creatordate | sed -n '2 p')"
 echo $PREV_TAG
 echo "Bug Fixes:" > changelog.md
