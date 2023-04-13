@@ -1,5 +1,5 @@
 #!/bin/bash
-PREV_TAG=$(git tag --sort=-creatordate | sed -n '2 p')
+export PREV_TAG="$(git tag --sort=-creatordate | sed -n '2 p')"
 echo $PREV_TAG
 echo "Bug Fixes:" > changelog.md
 git log ${PREV_TAG}..HEAD --grep="^fix" --pretty=format:"%C(auto)- %s %h" >> changelog.md
