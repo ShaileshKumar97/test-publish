@@ -1,7 +1,7 @@
 #!/bin/bash
 PREV_TAG="$(git tag --sort=-creatordate | sed -n '2 p')"
 echo "### Bug Fixes" > changelog.md
-echo ${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}
+echo ${{ GITHUB_SERVER_URL }}/${{ GITHUB_REPOSITORY }}
 git log ${PREV_TAG}..HEAD --grep="^fix" --pretty=format:"%C(auto)- %s ([%h](${{ env.GITHUB_SERVER_URL }}/${{ env.GITHUB_REPOSITORY }}/commit/%H))" | grep fix >> changelog.md
 echo "\\" >> changelog.md
 echo "### Features" >> changelog.md
