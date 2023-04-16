@@ -15,15 +15,19 @@ jobs:
       run: |
         chmod +x ./runner.sh
         ./runner.sh
+    - name: Set up environment variable
+      run: echo "CURRENT_TAG=${{ env.CURRENT_TAG }}" >> $GITHUB_ENV
       env:
           GITHUB_SERVER_URL: ${{ github.server_url }}
           GITHUB_REPOSITORY: ${{ github.repository }}
       shell: bash
     - name: Commit and push changes
       run: |
-        git config --global user.name "ShaileshKumar97"
-        git config --global user.email "kumar.shailesh1597@gmail.com"
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "noreply@github.com"
         git checkout master
         git add CHANGELOG.md
-        git commit -m "Generate changelog"
+        git commit -m "chore(release): release ${{ env.CURRENT_TAG }}#v"
         git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
