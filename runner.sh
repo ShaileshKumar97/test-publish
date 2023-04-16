@@ -4,7 +4,7 @@ CURRENT_TAG="$(git tag --sort=-creatordate | sed -n '1 p')"
 
 # Generate changelogs
 
-echo "[${CURRENT_TAG#v}]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/compare/${PREV_TAG}...${CURRENT_TAG})" ($(date +%F)) > temp_changelog.md
+echo "[${CURRENT_TAG#v}]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/compare/${PREV_TAG}...${CURRENT_TAG})" "($(date +%F))" > temp_changelog.md
 echo "---" >> temp_changelog.md
 echo "### Bug Fixes" >> temp_changelog.md
 echo $GITHUB_SERVER_URL/$GITHUB_REPOSITORY
