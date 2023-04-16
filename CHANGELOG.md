@@ -1,3 +1,12 @@
+[1.3.4](https://github.com/ShaileshKumar97/test-publish/compare/v1.3.2...v1.3.4) 2023-04-16
+---
+### Bug Fixes
+
+### Features
+- chore(release): release 1.3.4 ([c3eac4f](https://github.com/ShaileshKumar97/test-publish/commit/c3eac4f9df6c3b067e8ee39b8159bce76624ca46))
+- chore(release): release 1.3.3 ([bb5af8d](https://github.com/ShaileshKumar97/test-publish/commit/bb5af8db615c4fdfc3497a8006dfdabbddbaf013))
+
+### Merged Pull Requests
 2023-04-16
 ---
 ### Bug Fixes
